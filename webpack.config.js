@@ -1,9 +1,14 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js',
+    print: './src/print.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -28,5 +33,12 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin(), // 清理
+    new HtmlWebpackPlugin({// 自动绑定所有bundle
+      filename: 'index.html', // 输出到dist的文件名，默认index.html
+      template: 'index.html'  // 输出文件的模板，绝对/相对路径
+    })
+  ],
 };
