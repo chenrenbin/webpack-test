@@ -9,7 +9,12 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/' // 用于webpack-dev-middleware+express
+  },
+  devtool: 'source-map', // 报错定位
+  devServer: { // 使用webpack-dev-server自动刷新，或使用webpack-dev-middleware+express
+    contentBase: './dist'
   },
   module: {
     rules: [
