@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: ['./src/index.js'],
   // webpack-dev-middleware启用HMR
   // entry: ['webpack-hot-middleware/client.js', './src/index.js'],
@@ -48,7 +48,6 @@ module.exports = {
       template: 'index.html'  // 输出文件的模板，绝对/相对路径
     }),
     // 启动HMR---热更新
-    new webpack.NamedModulesPlugin(), // 查看要修补(patch)的依赖
     new webpack.HotModuleReplacementPlugin()
   ],
 };
