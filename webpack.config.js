@@ -1,20 +1,22 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    app: './src/index.js',
-    print: './src/print.js'
-  },
+  mode: 'development',
+  entry: ['./src/index.js'],
+  // webpack-dev-middleware启用HMR
+  // entry: ['webpack-hot-middleware/client.js', './src/index.js'],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/' // 用于webpack-dev-middleware+express
   },
-  devtool: 'source-map', // 报错定位
+  devtool: 'inline-source-map', // 报错定位
   devServer: { // 使用webpack-dev-server自动刷新，或使用webpack-dev-middleware+express
-    contentBase: './dist'
+    contentBase: './dist',
+    hot: true //  热更新
   },
   module: {
     rules: [
@@ -44,6 +46,9 @@ module.exports = {
     new HtmlWebpackPlugin({// 自动绑定所有bundle
       filename: 'index.html', // 输出到dist的文件名，默认index.html
       template: 'index.html'  // 输出文件的模板，绝对/相对路径
-    })
+    }),
+    // 启动HMR---热更新
+    new webpack.NamedModulesPlugin(), // 查看要修补(patch)的依赖
+    new webpack.HotModuleReplacementPlugin()
   ],
 };
