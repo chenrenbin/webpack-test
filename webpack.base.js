@@ -3,10 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    index: './src/index.js',
-    another: './src/print.js'
-  },
+  entry: ['./src/index.js'],
   output: {
     filename: '[name].bundle.js',
     // chunkFilename: '[name].bundle.js', // 动态import的模块名
