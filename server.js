@@ -4,7 +4,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const app = express();
-const config = require('./webpack.config.js');
+const config = require(`./webpack.${process.env.env_config}.js`);
 config.entry.unshift('webpack-hot-middleware/client.js') // 使webpack-hot-middleware生效
 const compiler = webpack(config);
 

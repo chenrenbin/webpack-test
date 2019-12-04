@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: ['./src/index.js'],
   // webpack-dev-middleware启用HMR
   // entry: ['webpack-hot-middleware/client.js', './src/index.js'],
