@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: './src/index.ts',
     vendor: ['lodash']
   },
   output: {
@@ -14,13 +14,25 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/' // 用于webpack-dev-middleware+express
   },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
   plugins: [
     new CleanWebpackPlugin(), // 清理
-    new HtmlWebpackPlugin({// 自动绑定所有bundle
+    new HtmlWebpackPlugin({ // 自动绑定所有bundle
       filename: 'index.html', // 输出到dist的文件名，默认index.html
       template: 'index.html'  // 输出文件的模板，绝对/相对路径
     }),
-    new webpack.HashedModuleIdsPlugin(), // 固定vendor的hash值不被刷新
+    new webpack.HashedModuleIdsPlugin() // 固定vendor的hash值不被刷新
   ],
   optimization: { // 代码分离
     splitChunks: {
