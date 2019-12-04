@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open",
-    "server": "cross-env env_config=dev node server.js",
-    "dev-server": "cross-env env_config=prod node dev-server.js"
+    "server": "cross-env env_config=prod node server.js",
+    "dev-server": "cross-env env_config=dev node dev-server.js"
   },
   "author": "",
   "license": "ISC",
