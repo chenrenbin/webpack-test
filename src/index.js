@@ -1,18 +1,15 @@
 import _ from 'lodash';
+import Print from './print';
 
 function component() {
   var element = document.createElement('div');
   var btn = document.createElement('button');
 
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
   btn.innerHTML = 'Click me and check the console!';
-  // 懒加载模块--点击后进行加载
-  btn.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
-    module.default()
-  });
+  btn.onclick = Print.bind(null, 'Hello webpack!');
+ 
   element.appendChild(btn);
-
   return element;
 }
 let element = component(); // 当 print.js 改变导致页面重新渲染时，重新获取渲染的元素
